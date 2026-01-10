@@ -1,6 +1,6 @@
 import express from 'express';
 import router from "./routes/memoRoute.js";
-import connectDB from "../config/db.js";
+import connectDB from "./config/db.js";
 
 const app = express();
 const PORT = 5050;
