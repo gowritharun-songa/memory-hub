@@ -27,8 +27,3 @@ Thumbs.db
 frontend/.next/
 frontend/.parcel-cache/
 frontend/.vite/
-
-backend/node_modules/@upstash/
-backend/node_modules/cors/
-backend/node_modules/object-assign/
-backend/node_modules/uncrypto/
