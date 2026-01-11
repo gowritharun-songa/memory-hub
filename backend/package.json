@@ -10,6 +10,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@upstash/ratelimit": "^2.0.7",
+    "@upstash/redis": "^1.36.1",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "mongoose": "^9.1.2",
