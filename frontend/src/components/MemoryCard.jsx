@@ -14,6 +14,10 @@ const MemoryCard = ({memo}) => {
           <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-4 line-clamp-3">
             {memo.content}
           </p>
+
+          <p className="text-black-600 font-semibold  text-sm md:text-base leading-relaxed text-right mb-4 line-clamp-3">
+            - {memo.creator}
+          </p>
           
           {/* Card Actions Footer */}
           <div className="flex items-center justify-between pt-4 border-t border-gray-100">
