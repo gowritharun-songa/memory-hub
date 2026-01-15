@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { ArrowLeftIcon } from "lucide-react";
 import toast from "react-hot-toast";
-import axios from "axios";
+import api from "../lib/axios.js";
 
 const Create = () => {
   const [title, setTitle] = useState("");
@@ -23,7 +23,7 @@ const Create = () => {
     setLoading(true);
     
     try {
-      await axios.post("http://localhost:5050/api/memories", {
+      await api.post("/memories", {
         title, 
         creator,
         content
@@ -37,9 +37,10 @@ const Create = () => {
           duration: 3000,
           icon:"🐢"
         });
+      } else {
+        toast.error("Faild to create");
       }
-      toast.error("Faild to create");
-    } finally {
+      } finally {
       setLoading(false);
     }
 

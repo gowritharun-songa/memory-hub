@@ -1,8 +1,8 @@
 import Navbar from "../components/Navbar"
 import { useEffect, useState } from "react";
 import RateLimit from "../components/RateLimit";
-import axios from "axios";
 import toast from "react-hot-toast";
+import api from "../lib/axios.js";
 import Loading from "../components/Loading";
 import MemoryCard from "../components/MemoryCard";
 
@@ -13,12 +13,11 @@ const Home = () => {
   const [memories, setMemories] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const api = "http://localhost:5050/api/memories";
   
   useEffect(() => {
     const fetchMemories = async() => {
       try {
-        const memos = await axios.get(api);
+        const memos = await api.get('/memories');
         const data = memos.data;
         // console.log(data);
         setMemories(data);
@@ -41,13 +40,10 @@ const Home = () => {
     <div className="min-h-screen ">
       <Navbar />
       
-      {/* Rate Limited State */}
       {isRateLimited && <RateLimit />}
 
-      {/* Main Content Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         
-        {/* Loading State */}
         {loading && <Loading />}
         
         {!loading && memories.length === 0 && !isRateLimited && (
@@ -84,7 +80,7 @@ const Home = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {memories.map((memo) => (
-                <MemoryCard key={memo._id} memo={memo} />
+                <MemoryCard key={memo._id} memo={memo} setMemories={setMemories}/>
               ))}
             </div>
           </div>

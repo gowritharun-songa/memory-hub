@@ -1,8 +1,24 @@
 import { PenSquareIcon, Trash2Icon } from "lucide-react"
 import { Link } from "react-router"
 import { formatDate } from "../lib/utils.js"
+import api from "../lib/axios.js"
+import toast from "react-hot-toast"
 
-const MemoryCard = ({memo}) => {
+const MemoryCard = ({memo, setMemories}) => {
+
+  const handleDelete = async (e, id) => {
+    e.preventDefault();
+    if(!window.confirm("Sure delete?")) return;
+    try {
+      await api.delete(`/memories/${id}`);
+      setMemories((prev) => prev.filter(memo => memo._id !== id));
+      toast.success("Sucessfully Deleted");
+    } catch(error) {
+      toast.error("Unable to delte");
+      console.log("Failed to delete", error.message);
+    }
+  }
+
   return (
     <div className="group">
       <Link to={`/memory/${memo._id}`}>
@@ -36,6 +52,7 @@ const MemoryCard = ({memo}) => {
               </button>
               
               <button 
+                onClick={(e) => handleDelete(e, memo._id)}
                 className="p-2 rounded-lg text-red-600 hover:bg-red-50 transition-all duration-200 hover:scale-110 active:scale-95"
                 aria-label="Delete memory"
               >
